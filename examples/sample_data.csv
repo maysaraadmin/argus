@@ -1,0 +1,11 @@
+id,name,type,dob,organization,phone,email,address,city,country
+1,John Smith,person,1980-05-15,TechCorp,+1-555-1234,john.smith@example.com,"123 Main St, Apt 4B",New York,US
+2,Jane Doe,person,1975-11-22,TechCorp,+1-555-5678,jane.doe@example.com,"456 Oak Ave",Boston,US
+3,TechCorp,organization,,,+1-555-9999,contact@techcorp.com,"789 Innovation Blvd",San Francisco,US
+4,Jon Smith,person,1980-05-15,TechCorp,+1-555-1234,jon.smith@techcorp.com,"123 Main Street",New York,US
+5,Alice Johnson,person,1985-03-10,DataCorp,+1-555-9876,alice.j@datacorp.com,"321 Data Drive",Austin,US
+6,DataCorp,organization,,,+1-555-1111,info@datacorp.com,"456 Tech Park",Austin,US
+7,Bob Wilson,person,1978-07-22,TechCorp,+1-555-4321,bob.w@techcorp.com,"789 Innovation Blvd, Suite 200",San Francisco,US
+8,Carol Davis,person,1982-09-18,HealthInc,+1-555-8765,carol.d@healthinc.com,"123 Medical Center",Chicago,US
+9,HealthInc,organization,,,+1-555-2222,info@healthinc.com,"456 Hospital Plaza",Chicago,US
+10,Johnathan Smith,person,1980-05-15,TechCorp,+1-555-1234,j.smith@techcorp.com,"123 Main Street",New York,US

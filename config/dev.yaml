@@ -1,0 +1,63 @@
+# Development configuration for Argus MVP
+
+# Database configuration
+database:
+  url: "postgresql://argus:argus123@localhost:5432/argus"
+  pool_size: 10
+  max_overflow: 20
+
+# Redis configuration
+redis:
+  host: "localhost"
+  port: 6379
+  db: 0
+  password: null
+
+# API configuration
+api:
+  host: "0.0.0.0"
+  port: 8000
+  debug: true
+  cors_origins:
+    - "*"
+    - "http://localhost:8501"
+    - "http://127.0.0.1:8501"
+
+# Entity resolution configuration
+entity_resolution:
+  similarity_threshold: 0.85
+  possible_match_threshold: 0.65
+  non_match_threshold: 0.3
+  weights:
+    name: 0.4
+    dob: 0.3
+    address: 0.2
+    phone: 0.1
+  blocking:
+    methods:
+      - phonetic: ["name"]
+      - exact: ["country", "postcode"]
+      - range: ["age", 5]
+
+# Logging configuration
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file_path: "logs/argus.log"
+
+# Storage configuration
+storage:
+  backend: "file"  # Options: file, memory
+  data_dir: "data"
+  
+# Cache configuration
+cache:
+  enabled: true
+  ttl: 300  # 5 minutes
+  max_size: 10000
+
+# Security configuration
+security:
+  secret_key: "dev-secret-key-change-in-production"
+  access_token_expire_minutes: 30
+  algorithm: "HS256"
