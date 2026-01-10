@@ -22,6 +22,11 @@ from argus.exceptions import (
 )
 from src.core.graph import KnowledgeGraph, Entity
 from src.core.resolver import EntityResolver
+from src.core.security import security_manager, setup_demo_users, Permission, ClearanceLevel
+from src.core.collaboration import collaboration_manager, AnnotationType, WorkspaceRole
+from src.core.traceability import traceability_manager, SourceType, DocumentType, ConfidenceLevel
+from src.core.alerting import alerting_manager, AlertSeverity, PatternType, AlertStatus
+from src.core.plugins import plugin_manager, PluginType
 from src.data.models import (
     EntityCreate, EntityUpdate, EntityResponse,
     RelationshipCreate, RelationshipResponse,
@@ -493,7 +498,245 @@ async def get_stats():
         logger.error(f"Failed to get stats: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
-# Run server
+# ===== SECURITY ENDPOINTS =====
+
+@app.post("/api/auth/login")
+async def login(username: str, password: str):
+    """Authenticate user and return session token"""
+    try:
+        token = security_manager.authenticate(username, password)
+        if token:
+            return {"token": token, "message": "Login successful"}
+        else:
+            raise HTTPException(status_code=401, detail="Invalid credentials")
+    except Exception as e:
+        logger.error(f"Login failed: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/api/auth/logout")
+async def logout(token: str):
+    """Logout user and invalidate token"""
+    try:
+        security_manager.logout(token)
+        return {"message": "Logout successful"}
+    except Exception as e:
+        logger.error(f"Logout failed: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/api/security/audit-log")
+async def get_audit_log(token: str, start_date: Optional[datetime] = None, end_date: Optional[datetime] = None):
+    """Get audit log (admin only)"""
+    try:
+        audit_log = security_manager.get_audit_log(token, start_date, end_date)
+        return {"audit_log": audit_log}
+    except Exception as e:
+        logger.error(f"Failed to get audit log: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+# ===== COLLABORATION ENDPOINTS =====
+
+@app.post("/api/workspaces")
+async def create_workspace(name: str, description: str, token: str):
+    """Create a new workspace"""
+    try:
+        session = security_manager.validate_token(token)
+        if not session:
+            raise HTTPException(status_code=401, detail="Invalid token")
+        
+        workspace_id = collaboration_manager.create_workspace(name, description, session['user_id'])
+        return {"workspace_id": workspace_id, "message": "Workspace created"}
+    except Exception as e:
+        logger.error(f"Failed to create workspace: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/api/workspaces")
+async def get_user_workspaces(token: str):
+    """Get user's workspaces"""
+    try:
+        session = security_manager.validate_token(token)
+        if not session:
+            raise HTTPException(status_code=401, detail="Invalid token")
+        
+        workspaces = collaboration_manager.get_user_workspaces(session['user_id'])
+        return {"workspaces": [ws.__dict__ for ws in workspaces]}
+    except Exception as e:
+        logger.error(f"Failed to get workspaces: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/api/workspaces/{workspace_id}/annotations")
+async def add_annotation(workspace_id: str, entity_id: Optional[str] = None, 
+                       relationship_id: Optional[str] = None, annotation_type: str = "note",
+                       content: str = "", token: str = ""):
+    """Add annotation to workspace"""
+    try:
+        session = security_manager.validate_token(token)
+        if not session:
+            raise HTTPException(status_code=401, detail="Invalid token")
+        
+        annotation_type_enum = AnnotationType(annotation_type)
+        annotation_id = collaboration_manager.add_annotation(
+            workspace_id, session['user_id'], entity_id, relationship_id,
+            annotation_type_enum, content
+        )
+        return {"annotation_id": annotation_id, "message": "Annotation added"}
+    except Exception as e:
+        logger.error(f"Failed to add annotation: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+# ===== TRACEABILITY ENDPOINTS =====
+
+@app.post("/api/traceability/sources")
+async def add_source_document(name: str, source_type: str, document_type: str,
+                          file_path: Optional[str] = None, url: Optional[str] = None):
+    """Add a source document"""
+    try:
+        source_type_enum = SourceType(source_type)
+        document_type_enum = DocumentType(document_type)
+        
+        document_id = traceability_manager.add_source_document(
+            name, source_type_enum, document_type_enum, file_path, url
+        )
+        return {"document_id": document_id, "message": "Source document added"}
+    except Exception as e:
+        logger.error(f"Failed to add source document: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/api/traceability/entities/{entity_id}/sources")
+async def get_entity_sources(entity_id: str, field_name: Optional[str] = None):
+    """Get source documents for entity"""
+    try:
+        sources = traceability_manager.get_entity_sources(entity_id, field_name)
+        return {"sources": sources}
+    except Exception as e:
+        logger.error(f"Failed to get entity sources: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/api/traceability/relationships/{relationship_id}/sources")
+async def get_relationship_sources(relationship_id: str):
+    """Get source documents for relationship"""
+    try:
+        sources = traceability_manager.get_relationship_sources(relationship_id)
+        return {"sources": sources}
+    except Exception as e:
+        logger.error(f"Failed to get relationship sources: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+# ===== ALERTING ENDPOINTS =====
+
+@app.post("/api/alerts/rules")
+async def create_alert_rule(name: str, description: str, pattern_type: str,
+                         conditions: dict, severity: str, token: str):
+    """Create an alert rule"""
+    try:
+        session = security_manager.validate_token(token)
+        if not session:
+            raise HTTPException(status_code=401, detail="Invalid token")
+        
+        pattern_type_enum = PatternType(pattern_type)
+        severity_enum = AlertSeverity(severity)
+        
+        rule_id = alerting_manager.create_rule(
+            name, description, pattern_type_enum, conditions, severity_enum, session['user_id']
+        )
+        return {"rule_id": rule_id, "message": "Alert rule created"}
+    except Exception as e:
+        logger.error(f"Failed to create alert rule: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/api/alerts/active")
+async def get_active_alerts(token: str):
+    """Get active alerts"""
+    try:
+        session = security_manager.validate_token(token)
+        if not session:
+            raise HTTPException(status_code=401, detail="Invalid token")
+        
+        alerts = alerting_manager.get_active_alerts(session['user_id'])
+        return {"alerts": [alert.__dict__ for alert in alerts]}
+    except Exception as e:
+        logger.error(f"Failed to get active alerts: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/api/alerts/{alert_id}/acknowledge")
+async def acknowledge_alert(alert_id: str, token: str, notes: Optional[str] = None):
+    """Acknowledge an alert"""
+    try:
+        session = security_manager.validate_token(token)
+        if not session:
+            raise HTTPException(status_code=401, detail="Invalid token")
+        
+        success = alerting_manager.acknowledge_alert(alert_id, session['user_id'], notes)
+        if success:
+            return {"message": "Alert acknowledged"}
+        else:
+            raise HTTPException(status_code=404, detail="Alert not found")
+    except Exception as e:
+        logger.error(f"Failed to acknowledge alert: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+# ===== PLUGIN ENDPOINTS =====
+
+@app.get("/api/plugins")
+async def get_available_plugins():
+    """Get available plugins"""
+    try:
+        plugins = plugin_manager.get_available_plugins()
+        return {"plugins": [plugin.__dict__ for plugin in plugins]}
+    except Exception as e:
+        logger.error(f"Failed to get plugins: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/api/plugins/{plugin_name}/load")
+async def load_plugin(plugin_name: str):
+    """Load a plugin"""
+    try:
+        success = plugin_manager.load_plugin(plugin_name)
+        if success:
+            return {"message": f"Plugin {plugin_name} loaded successfully"}
+        else:
+            raise HTTPException(status_code=400, detail=f"Failed to load plugin {plugin_name}")
+    except Exception as e:
+        logger.error(f"Failed to load plugin: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/api/plugins/{plugin_name}/configure")
+async def configure_plugin(plugin_name: str, config: dict):
+    """Configure a plugin"""
+    try:
+        success = plugin_manager.configure_plugin(plugin_name, config)
+        if success:
+            return {"message": f"Plugin {plugin_name} configured successfully"}
+        else:
+            raise HTTPException(status_code=400, detail=f"Failed to configure plugin {plugin_name}")
+    except Exception as e:
+        logger.error(f"Failed to configure plugin: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+# Initialize demo data
+@app.on_event("startup")
+async def startup_event():
+    """Initialize demo data on startup"""
+    try:
+        # Initialize knowledge graph
+        kg_instance = KnowledgeGraph()
+        
+        # Setup demo users
+        setup_demo_users()
+        
+        # Start alerting monitoring
+        def data_provider():
+            return {
+                'graph': kg_instance.graph,
+                'transactions': [],  # Would come from transaction data
+                'events': []  # Would come from event data
+            }
+        
+        alerting_manager.start_monitoring(data_provider, check_interval=60)
+        
+        logger.info("Argus API server initialized successfully")
+    except Exception as e:
+        logger.error(f"Failed to initialize server: {e}")
+
 if __name__ == "__main__":
     api_config = config.api
     uvicorn.run(

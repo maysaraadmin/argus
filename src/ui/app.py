@@ -14,6 +14,8 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 from argus.config import config
 from argus.logging import get_logger
+from src.ui.visualization_pages import viz_pages
+from src.ui.enhanced_resolution import enhanced_resolution_ui
 
 # Initialize logger
 logger = get_logger(__name__)
@@ -57,7 +59,8 @@ def main():
         st.header("Navigation")
         page = st.radio(
             "Select Page",
-            ["Dashboard", "Graph Explorer", "Entity Resolution", "Data Import", "API Docs"]
+            ["Dashboard", "Advanced Graph Explorer", "Entity Resolution", "Data Import", 
+             "Geospatial Analysis", "Temporal Analysis", "Network Metrics", "API Docs"]
         )
         
         st.divider()
@@ -71,12 +74,20 @@ def main():
     # Page routing
     if page == "Dashboard":
         show_dashboard()
+    elif page == "Advanced Graph Explorer":
+        viz_pages.render_advanced_graph_explorer()
     elif page == "Graph Explorer":
         show_graph_explorer()
     elif page == "Entity Resolution":
-        show_entity_resolution()
+        enhanced_resolution_ui.render_enhanced_resolution_page()
     elif page == "Data Import":
         show_data_import()
+    elif page == "Geospatial Analysis":
+        viz_pages.render_geospatial_analysis()
+    elif page == "Temporal Analysis":
+        viz_pages.render_temporal_analysis()
+    elif page == "Network Metrics":
+        viz_pages.render_network_metrics()
     elif page == "API Docs":
         show_api_docs()
 

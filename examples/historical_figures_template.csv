@@ -1,0 +1,26 @@
+id,name,type,birth_year,death_year,profession,country,description,source
+person_001,Albert Einstein,person,1879,1955,Theoretical Physicist,Germany,Developed the theory of relativity and mass-energy equivalence,Biography.com
+person_002,Marie Curie,person,1867,1934,Physicist and Chemist,Poland,Pioneer in radioactivity research, first woman to win Nobel Prize,Nobel.org
+person_003,Nikola Tesla,person,1856,1943,Inventor,Serbian-American,Invented alternating current system, pioneered wireless communication,Tesla Museum
+person_004,Thomas Edison,person,1847,1931,Businessman and Inventor,American,Held over 1,000 patents, developed phonograph and incandescent light bulb,Edison Museum
+person_005,Leonardo da Vinci,person,1452,1519,Polymath,Italian,Renaissance polymath: artist, scientist, inventor, and architect,Renaissance Archives
+person_006,Isaac Newton,person,1643,1727,Mathematician and Physicist,English,Formulated laws of motion and universal gravitation,Royal Society Archives
+person_007,Galileo Galilei,person,1564,1642,Astronomer and Physicist,Italian,Supported heliocentric model, faced Inquisition,Vatican Archives
+person_008,Marie Antoinette,person,1755,1793,Queen,Austria,Last Queen of France before French Revolution,Palace of Versailles Records
+person_009,Napoleon Bonaparte,person,1769,1821,Military Leader and Emperor,France,Conquered much of Europe, reformed legal system,Napoleonic Archives
+person_010,Ludwig van Beethoven,person,1770,1827,Composer,German,Composed symphonies despite deafness, bridged Classical and Romantic eras,Beethoven Museum
+person_011,William Shakespeare,person,1564,1616,Playwright and Poet,English,Wrote 37 plays and 154 sonnets, foundational to English literature,British Library
+person_012,Charles Darwin,person,1809,1882,Naturalist,English,Developed theory of evolution by natural selection,Natural History Museum
+person_013,Sigmund Freud,person,1856,1939,Neurologist,Austrian,Father of psychoanalysis, developed theory of unconscious mind,Freud Archives
+person_014,Pablo Picasso,person,1881,1973,Artist,Spanish,Pioneered Cubism, one of most influential artists of 20th century,Picasso Museum
+person_015,Albert Schweitzer,person,1875,1965,Physician and Philosopher,German,Medical missionary in Africa, Nobel Peace Prize winner,Nobel Prize Database
+person_016,Mahatma Gandhi,person,1869,1948,Political Leader,Indian,Leader of Indian independence movement, pioneer of nonviolent resistance,Gandhi Archives
+person_017,Martin Luther King Jr.,person,1929,1968,Civil Rights Leader,American,Leader of American civil rights movement, advocated nonviolent civil disobedience,King Center
+person_018,Queen Victoria,person,1819,1901,Monarch,British,Longest-reigning British monarch, empire expanded during reign,British Royal Archives
+person_019,Winston Churchill,person,1874,1965,Statesman and Writer,British,Prime Minister during WWII, Nobel Prize in Literature,Churchill Archives
+person_020,Marie Curie,person,1867,1934,Physicist and Chemist,Poland,Discovered polonium and radium, first woman professor at Sorbonne,Nobel Prize Database
+person_021,Pierre Curie,person,1859,1906,Physicist,France,Collaborated with Marie Curie on radioactivity research, shared Nobel Prize,Nobel Prize Database
+person_022,Robert Oppenheimer,person,1904,1967,Theoretical Physicist,American,Scientific director of Manhattan Project, "Father of atomic bomb",Manhattan Project Archives
+person_023,Alan Turing,person,1912,1954,Mathematician and Computer Scientist,British,Broke German Enigma code, father of theoretical computer science,Turing Archives
+person_024,Rosalind Franklin,person,1920,1958,Chemist and X-ray Crystallographer,British,Contributed to understanding of DNA structure,Royal Society Archives
+person_025,Stephen Hawking,person,1942,2018,Theoretical Physicist,British,Worked on black holes and cosmology, author of "A Brief History of Time",Cambridge University Archives

@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 """
-Argus MVP - Start all services
+Argus MVP - Start all services (Fixed Version)
 """
 import sys
 import os
 import subprocess
 import time
+import signal
 
 def signal_handler(signum, frame):
     """Handle Ctrl+C gracefully"""
@@ -13,21 +14,27 @@ def signal_handler(signum, frame):
     if hasattr(signal, "SIGINT"):
         sys.exit(0)
 
+def check_service(url, description, timeout=5):
+    """Check if a service is responding"""
+    try:
+        import requests
+        response = requests.get(url, timeout=timeout)
+        return response.status_code == 200
+    except:
+        return False
+
 def start_api():
     """Start API server"""
     print("🔧 Starting API Server...")
-    env = os.environ.copy()
-    env['PYTHONPATH'] = os.path.join(os.path.dirname(__file__), 'src')
-    
-    api_cmd = [
-        sys.executable, '-c',
-        'import sys; sys.path.insert(0, "d:\\argus\\src"); '
-        'from src.api.server import app; '
-        'import uvicorn; '
-        'uvicorn.run(app, host="localhost", port=8000)'
-    ]
-    
     try:
+        env = os.environ.copy()
+        env['PYTHONPATH'] = os.path.join(os.path.dirname(__file__), 'src')
+        
+        api_cmd = [
+            sys.executable, '-c',
+            'import sys; sys.path.insert(0, "d:\\\\argus\\src"); from src.api.server import app; import uvicorn; uvicorn.run(app, host="127.0.0.1", port=8000)'
+        ]
+        
         process = subprocess.Popen(api_cmd, env=env, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         print("   ✅ API Server started!")
         print("   📊 API Documentation: http://localhost:8000/docs")
@@ -39,17 +46,17 @@ def start_api():
 def start_ui():
     """Start Streamlit UI"""
     print("📊 Starting Streamlit UI...")
-    env = os.environ.copy()
-    env['PYTHONPATH'] = os.path.join(os.path.dirname(__file__), 'src')
-    
-    ui_cmd = [
-        sys.executable, '-m', 'streamlit', 'run',
-        'src/ui/app.py',
-        '--server.address=localhost',
-        '--server.port=8501'
-    ]
-    
     try:
+        env = os.environ.copy()
+        env['PYTHONPATH'] = os.path.join(os.path.dirname(__file__), 'src')
+        
+        ui_cmd = [
+            sys.executable, '-m', 'streamlit', 'run',
+            'src/ui/app.py',
+            '--server.address=localhost',
+            '--server.port=8501'
+        ]
+        
         process = subprocess.Popen(ui_cmd, env=env, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         print("   ✅ Streamlit UI started!")
         print("   🌐 Web Interface: http://localhost:8501")
@@ -58,22 +65,12 @@ def start_ui():
         print(f"   ❌ Failed to start Streamlit UI: {e}")
         return None
 
-def check_service(url, description, timeout=5):
-    """Check if a service is responding"""
-    try:
-        import requests
-        response = requests.get(url, timeout=timeout)
-        return response.status_code == 200
-    except:
-        return False
-
 def main():
     """Main startup function"""
     print("🚀 Argus MVP - Starting all services...")
     print("=" * 50)
     
     # Set up signal handler
-    import signal
     signal.signal(signal.SIGINT, signal_handler)
     
     # Start services
@@ -109,14 +106,14 @@ def main():
             while True:
                 time.sleep(10)
         except KeyboardInterrupt:
-            print("\n🛑 Shutdown requested by user")
-            if api_process:
-                api_process.terminate()
-                api_process.wait()
-            if ui_process:
-                ui_process.terminate()
-                ui_process.wait()
-            print("✅ Services stopped")
+                print("\n🛑 Shutdown requested by user")
+                if api_process:
+                    api_process.terminate()
+                    api_process.wait()
+                if ui_process:
+                    ui_process.terminate()
+                    ui_process.wait()
+                print("✅ Services stopped")
     else:
         print("\n❌ Some services failed to start")
         return 1
