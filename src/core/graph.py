@@ -322,7 +322,7 @@ class KnowledgeGraph:
             },
             "density": nx.density(self.graph),
             "connected_components": nx.number_connected_components(self.graph),
-            "avg_clustering": nx.average_clustering(self.graph),
+            "avg_clustering": self._calculate_avg_clustering(),
         }
     
     def get_neighbors(self, entity_id: str, depth: int = 1) -> Set[str]:
@@ -336,6 +336,23 @@ class KnowledgeGraph:
         # Get neighbors within specified depth
         subgraph = nx.ego_graph(self.graph, entity_id, radius=depth)
         return set(subgraph.nodes()) - {entity_id}
+    
+    def _calculate_avg_clustering(self) -> float:
+        """Calculate average clustering coefficient for MultiGraph"""
+        try:
+            # Convert to simple graph for clustering calculation
+            if self.graph.is_multigraph():
+                # For MultiGraph, convert to simple graph
+                G = nx.Graph()
+                for u, v, data in self.graph.edges(data=True):
+                    G.add_edge(u, v, **data)
+                return nx.average_clustering(G)
+            else:
+                # For simple graph, calculate directly
+                return nx.average_clustering(self.graph)
+        except Exception as e:
+            self.logger.warning(f"Failed to calculate average clustering: {e}")
+            return 0.0
     
     def _clear_entity_cache(self, entity_id: str):
         """Clear cache entries for entity"""
