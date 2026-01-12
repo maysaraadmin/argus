@@ -59,104 +59,318 @@ def call_api(endpoint: str, method: str = "GET", data: dict = None):
 def main():
     st.title("🔍 Historical Intelligence Analysis System (HIAS) - Intelligence Platform")
     
-    # Sidebar
+    # Sidebar with enhanced navigation
     with st.sidebar:
         st.sidebar.markdown("---")
         st.sidebar.markdown("### 🔍 HIAS Intelligence Platform")
         st.sidebar.markdown("Historical Intelligence Analysis System")
-        st.header("Navigation")
-        page = st.radio(
-            "Select Page",
-            ["Dashboard", "History Study", "Intelligence Analysis", "Intelligence History", "Open Source Map", "Advanced Graph Explorer", "Entity Resolution", "Data Import", 
-             "Geospatial Analysis", "Temporal Analysis", "Network Metrics", "API Docs"]
+        
+        # Search functionality
+        st.subheader("🔍 Quick Search")
+        search_query = st.text_input("Search tools...", placeholder="Type to search...", key="tool_search")
+        
+        # Tool descriptions and categories
+        st.header("📋 Navigation")
+        
+        # Enhanced navigation with descriptions
+        page_categories = {
+            "🏠 Dashboard": {
+                "description": "System overview and quick access",
+                "pages": ["Dashboard"]
+            },
+            "📚 Historical Analysis": {
+                "description": "Traditional historical research tools",
+                "pages": ["Timeline Explorer", "Figure Analysis", "Event Analysis", "Period Analysis", "Research Tools"]
+            },
+            "🧠 Intelligence Tools": {
+                "description": "SAT-driven analysis methodologies",
+                "pages": ["Analyst Workspace", "ACH Analysis", "Red Team Analysis", "Bias Detection", "Source Evaluation", "Counterfactual Analysis", "Intelligence Estimate"]
+            },
+            "🗺️ Geospatial Analysis": {
+                "description": "Interactive mapping and spatial analysis",
+                "pages": ["Open Source Map", "Geospatial Intelligence"]
+            },
+            "⚙️ System Tools": {
+                "description": "Advanced system and data tools",
+                "pages": ["Advanced Graph Explorer", "Entity Resolution", "Data Import", "Network Metrics", "Temporal Analysis"]
+            },
+            "📚 Documentation": {
+                "description": "API documentation and guides",
+                "pages": ["API Docs"]
+            }
+        }
+        
+        # Filter categories based on search
+        if search_query:
+            filtered_categories = {}
+            for category, info in page_categories.items():
+                matching_pages = [page for page in info["pages"] 
+                               if search_query.lower() in page.lower() or 
+                                  search_query.lower() in info["description"].lower()]
+                if matching_pages:
+                    filtered_categories[category] = {
+                        "description": info["description"],
+                        "pages": matching_pages
+                    }
+            page_categories = filtered_categories
+        
+        # Category selection with descriptions
+        selected_category = st.selectbox(
+            "Select Category",
+            list(page_categories.keys()),
+            help=page_categories.get(list(page_categories.keys())[0], {}).get("description", "")
         )
         
+        # Show category description
+        if selected_category in page_categories:
+            st.info(f"💡 {page_categories[selected_category]['description']}")
+        
+        # Page selection within category
+        if selected_category and selected_category in page_categories:
+            page = st.selectbox(
+                "Select Tool",
+                page_categories[selected_category]["pages"],
+                help="Choose the specific tool to use"
+            )
+        
+        # Recent tools (session state tracking)
         st.divider()
+        st.subheader("⏰ Recent Tools")
+        if 'recent_tools' not in st.session_state:
+            st.session_state.recent_tools = []
+        
+        # Display recent tools
+        for recent_tool in st.session_state.recent_tools[-3:]:
+            if st.button(f"🔄 {recent_tool}", key=f"recent_{recent_tool}"):
+                page = recent_tool
+                st.rerun()
         
         # Quick stats
+        st.divider()
+        st.subheader("📊 System Status")
         stats = call_api("/api/stats")
         if stats:
             st.metric("Entities", stats.get('entity_count', 0))
             st.metric("Relationships", stats.get('relationship_count', 0))
+        
+        # Workflow guidance
+        st.divider()
+        st.subheader("🎯 Workflow Guidance")
+        if st.button("📖 Quick Start Guide"):
+            st.session_state.show_guide = True
+        if st.button("🎓 SAT Tutorial"):
+            st.session_state.show_sat_tutorial = True
     
-    # Page routing
+    # Track recent tools
+    if 'recent_tools' not in st.session_state:
+        st.session_state.recent_tools = []
+    
+    # Add current tool to recent tools
+    if page not in st.session_state.recent_tools:
+        st.session_state.recent_tools.append(page)
+        # Keep only last 10 tools
+        if len(st.session_state.recent_tools) > 10:
+            st.session_state.recent_tools = st.session_state.recent_tools[-10:]
+    
+    # Show workflow guidance if requested
+    if st.session_state.get('show_guide', False):
+        show_quick_start_guide()
+        return
+    
+    if st.session_state.get('show_sat_tutorial', False):
+        show_sat_tutorial()
+        return
+    
+    # Enhanced page routing with better organization
     if page == "Dashboard":
         show_dashboard()
-    elif page == "History Study":
+    elif page in ["Timeline Explorer", "Figure Analysis", "Event Analysis", "Period Analysis", "Research Tools"]:
         history_pages = HistoryPages()
-        history_subpage = st.selectbox(
-            "Select History Study Page",
-            ["History Dashboard", "Timeline Viewer", "Figure Explorer", "Event Analyzer", "Period Browser", "Research Tools"]
-        )
         
-        if history_subpage == "History Dashboard":
-            history_pages.render_history_dashboard()
-        elif history_subpage == "Timeline Viewer":
+        if page == "Timeline Explorer":
             history_pages.render_timeline_viewer()
-        elif history_subpage == "Figure Explorer":
+        elif page == "Figure Analysis":
             history_pages.render_figure_explorer()
-        elif history_subpage == "Event Analyzer":
+        elif page == "Event Analysis":
             history_pages.render_event_analyzer()
-        elif history_subpage == "Period Browser":
+        elif page == "Period Analysis":
             history_pages.render_period_browser()
-        elif history_subpage == "Research Tools":
+        elif page == "Research Tools":
             history_pages.render_research_tools()
-    elif page == "Intelligence Analysis":
-        intelligence_pages = IntelligencePages()
-        intelligence_subpage = st.selectbox(
-            "Select Intelligence Analysis Page",
-            ["Intelligence Dashboard", "Network Analysis", "Pattern Analysis", "Geospatial Intelligence", "Threat Assessment"]
-        )
-        
-        if intelligence_subpage == "Intelligence Dashboard":
-            intelligence_pages.render_intelligence_dashboard()
-        elif intelligence_subpage == "Network Analysis":
-            intelligence_pages.render_network_analysis()
-        elif intelligence_subpage == "Pattern Analysis":
-            intelligence_pages.render_pattern_analysis()
-        elif intelligence_subpage == "Geospatial Intelligence":
-            intelligence_pages.render_geospatial_intelligence()
-        elif intelligence_subpage == "Threat Assessment":
-            intelligence_pages.render_threat_assessment()
-    elif page == "Intelligence History":
+            
+    elif page in ["Analyst Workspace", "ACH Analysis", "Red Team Analysis", "Bias Detection", "Source Evaluation", "Counterfactual Analysis", "Intelligence Estimate"]:
         intel_history_pages = IntelligenceHistoryPages()
-        intel_history_subpage = st.selectbox(
-            "Select Intelligence History Page",
-            ["Analyst Workspace", "ACH Wizard", "Bias Detection", "Source Evaluation", "Counterfactual Analysis", "Intelligence Estimate"]
-        )
         
-        if intel_history_subpage == "Analyst Workspace":
+        if page == "Analyst Workspace":
             intel_history_pages.render_analyst_workspace()
-        elif intel_history_subpage == "ACH Wizard":
+        elif page == "ACH Analysis":
             intel_history_pages.render_ach_wizard()
-        elif intel_history_subpage == "Bias Detection":
+        elif page == "Red Team Analysis":
+            intel_history_pages._render_red_team_analysis("soviet_union")
+        elif page == "Bias Detection":
             intel_history_pages.render_bias_detection()
-        elif intel_history_subpage == "Source Evaluation":
+        elif page == "Source Evaluation":
             intel_history_pages.render_source_evaluation()
-        elif intel_history_subpage == "Counterfactual Analysis":
-            intel_history_pages.render_counterfactual_analysis()
-        elif intel_history_subpage == "Intelligence Estimate":
+        elif page == "Counterfactual Analysis":
+            intel_history_pages.render_counterfactual_analysis("soviet_union")
+        elif page == "Intelligence Estimate":
             intel_history_pages.render_intelligence_estimate()
-    elif page == "Open Source Map":
-        history_engine = HistoryPages().engine
-        open_source_map = OpenSourceMap(history_engine)
-        open_source_map.render_interactive_map()
-    elif page == "Advanced Graph Explorer":
-        viz_pages.render_advanced_graph_explorer()
-    elif page == "Graph Explorer":
-        show_graph_explorer()
-    elif page == "Entity Resolution":
-        enhanced_resolution_ui.render_enhanced_resolution_page()
-    elif page == "Data Import":
-        show_data_import()
-    elif page == "Geospatial Analysis":
-        viz_pages.render_geospatial_analysis()
-    elif page == "Temporal Analysis":
-        viz_pages.render_temporal_analysis()
-    elif page == "Network Metrics":
-        viz_pages.render_network_metrics()
+            
+    elif page in ["Open Source Map", "Geospatial Intelligence"]:
+        if page == "Open Source Map":
+            history_engine = HistoryPages().engine
+            open_source_map = OpenSourceMap(history_engine)
+            open_source_map.render_interactive_map()
+        elif page == "Geospatial Intelligence":
+            intelligence_pages = IntelligencePages()
+            intelligence_pages.render_geospatial_intelligence()
+            
+    elif page in ["Advanced Graph Explorer", "Entity Resolution", "Data Import", "Network Metrics", "Temporal Analysis"]:
+        if page == "Advanced Graph Explorer":
+            viz_pages.render_advanced_graph_explorer()
+        elif page == "Entity Resolution":
+            enhanced_resolution_ui.render_enhanced_resolution_page()
+        elif page == "Data Import":
+            show_data_import()
+        elif page == "Network Metrics":
+            viz_pages.render_network_metrics()
+        elif page == "Temporal Analysis":
+            viz_pages.render_temporal_analysis()
+            
     elif page == "API Docs":
         show_api_docs()
+
+def show_quick_start_guide():
+    """Display quick start guide"""
+    st.header("📖 HIAS Quick Start Guide")
+    
+    st.markdown("### 🎯 Getting Started with Historical Intelligence Analysis")
+    
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        st.markdown("#### 📚 Step 1: Historical Research")
+        st.write("Start with traditional historical analysis:")
+        st.write("• **Timeline Explorer**: Chronological analysis")
+        st.write("• **Figure Analysis**: Actor-centric research")
+        st.write("• **Event Analysis**: Deep dive into specific events")
+        
+        st.markdown("#### 🧠 Step 2: Intelligence Analysis")
+        st.write("Apply SAT methodologies:")
+        st.write("• **ACH Analysis**: Competing hypotheses")
+        st.write("• **Bias Detection**: Identify cognitive biases")
+        st.write("• **Red Team**: Adversarial perspective")
+    
+    with col2:
+        st.markdown("#### 🗺️ Step 3: Spatial Analysis")
+        st.write("Add geographic context:")
+        st.write("• **Open Source Map**: Interactive mapping")
+        st.write("• **Geospatial Intelligence**: Spatial patterns")
+        
+        st.markdown("#### ⚙️ Step 4: Advanced Tools")
+        st.write("System and data management:")
+        st.write("• **Entity Resolution**: Data quality")
+        st.write("• **Network Metrics**: Relationship analysis")
+        st.write("• **Data Import**: Add your own data")
+    
+    st.markdown("### 🇷🇺 Example: Soviet Union Case Study")
+    st.info("""
+    **Perfect starting point**: Load the Soviet Union case study from **Analyst Workspace** 
+    to see a complete intelligence analysis workflow in action!
+    """)
+    
+    if st.button("🎯 Go to Analyst Workspace"):
+        st.session_state.page = "Analyst Workspace"
+        st.session_state.show_guide = False
+        st.rerun()
+    
+    if st.button("❌ Close Guide"):
+        st.session_state.show_guide = False
+        st.rerun()
+
+def show_sat_tutorial():
+    """Display SAT methodology tutorial"""
+    st.header("🎓 Structured Analytic Techniques (SAT) Tutorial")
+    
+    st.markdown("### 🧠 Intelligence-Grade Historical Analysis")
+    
+    tabs = st.tabs(["📋 Overview", "🔍 ACH", "🔴 Red Team", "🧩 Bias Detection", "🔄 Counterfactual"])
+    
+    with tabs[0]:
+        st.markdown("#### What are SATs?")
+        st.write("""
+        Structured Analytic Techniques are systematic methods used by intelligence agencies 
+        to improve analysis quality and reduce cognitive biases.
+        """)
+        
+        st.markdown("#### Why Use SATs for History?")
+        st.write("""
+        • **Reduce hindsight bias**: Analyze events with information available at the time
+        • **Consider alternatives**: Avoid single-explanation fallacies  
+        • **Evidence-based**: Tie conclusions to verifiable sources
+        • **Transparent reasoning**: Make analytic judgments explicit
+        """)
+    
+    with tabs[1]:
+        st.markdown("#### 🔍 Analysis of Competing Hypotheses (ACH)")
+        st.write("""
+        ACH is a systematic method for evaluating multiple explanations of historical events.
+        
+        **Steps:**
+        1. **Identify hypotheses** - Generate competing explanations
+        2. **Gather evidence** - Collect relevant information
+        3. **Create matrix** - Assess evidence against each hypothesis
+        4. **Evaluate consistency** - Identify diagnostic evidence
+        5. **Rank hypotheses** - Based on evidence consistency
+        """)
+        
+        st.success("🎯 **Soviet Union Example**: Elite defection hypothesis ranked highest!")
+    
+    with tabs[2]:
+        st.markdown("#### 🔴 Red Team Analysis")
+        st.write("""
+        Red Team analysis challenges primary analysis by adopting an adversarial perspective.
+        
+        **Purpose:**
+        • **Stress test** primary conclusions
+        • **Identify blind spots** in analysis
+        • **Challenge assumptions** and evidence
+        • **Improve robustness** of final judgments
+        """)
+        
+        st.warning("⚠️ **Key Insight**: Many historical narratives don't survive Red Team challenges!")
+    
+    with tabs[3]:
+        st.markdown("#### 🧩 Cognitive Bias Detection")
+        st.write("""
+        Identify and mitigate common cognitive biases in historical analysis:
+        
+        **Common Biases:**
+        • **Hindsight Bias**: "It was obvious all along"
+        • **Confirmation Bias**: Seeking confirming evidence
+        • **Narrative Bias**: Creating coherent stories
+        • **Mirror Imaging**: Assuming others think like us
+        """)
+        
+        st.info("💡 **Solution**: Use structured techniques to counteract biases!")
+    
+    with tabs[4]:
+        st.markdown("#### 🔄 Counterfactual Analysis")
+        st.write("""
+        Explore alternative historical scenarios to understand causality and decision points.
+        
+        **Methodology:**
+        1. **Identify decision points** - Critical historical choices
+        2. **Generate alternatives** - Plausible different paths
+        3. **Assess constraints** - What was actually possible
+        4. **Evaluate plausibility** - Likelihood of alternatives
+        """)
+        
+        st.success("🎯 **Soviet Union Example**: What if force was used in 1991?")
+    
+    if st.button("❌ Close Tutorial"):
+        st.session_state.show_sat_tutorial = False
+        st.rerun()
 
 def show_dashboard():
     """Dashboard page"""
