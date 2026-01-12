@@ -11,8 +11,14 @@ from datetime import date, datetime
 from typing import List, Dict
 import json
 
-from src.core.history_engine import HistoryEngine
-from src.data.history_models import (
+import sys
+import os
+
+# Add src to Python path
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+
+from core.history_engine import HistoryEngine
+from data.history_models import (
     HistoricalEvent, HistoricalFigure, HistoricalOrganization,
     HistoricalPeriod, Timeline, EventType, PeriodType
 )
@@ -582,8 +588,8 @@ class HistoryPages:
         # Sample figures
         julius_caesar = HistoricalFigure(
             name="Julius Caesar",
-            birth_date=date(-100, 7, 12),
-            death_date=date(-44, 3, 15),
+            birth_date=date(100, 7, 12),  # 100 BCE
+            death_date=date(44, 3, 15),    # 44 BCE
             birth_place="Rome",
             death_place="Rome",
             occupation=["Military General", "Politician", "Author"],
@@ -612,7 +618,7 @@ class HistoryPages:
             title="Crossing of the Rubicon",
             description="Julius Caesar led his army across the Rubicon river, defying the Roman Senate",
             event_type=EventType.POLITICAL,
-            date=date(-49, 1, 10),
+            date=date(49, 1, 10),  # 49 BCE
             location="Rubicon River, Italy",
             participants=[julius_caesar.id],
             significance="Marked the point of no return in Caesar's conflict with the Senate",
@@ -625,7 +631,7 @@ class HistoryPages:
         roman_timeline = Timeline(
             name="Roman History Timeline",
             description="Key events in Roman history",
-            start_date=date(-753, 1, 1),
+            start_date=date(753, 1, 1),  # 753 BCE
             end_date=date(476, 9, 4),
             events=[caesar_crossing.id],
             periods=[roman_period.id],

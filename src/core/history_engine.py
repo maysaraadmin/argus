@@ -4,7 +4,7 @@ Provides specialized functionality for historical research and analysis.
 """
 
 from datetime import date, datetime
-from typing import List, Dict, Optional, Tuple, Any
+from typing import List, Dict, Optional, Tuple, Any, Union
 import networkx as nx
 from collections import defaultdict
 import json
