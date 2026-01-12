@@ -17,6 +17,8 @@ from argus.logging import get_logger
 from src.ui.visualization_pages import viz_pages
 from src.ui.enhanced_resolution import enhanced_resolution_ui
 from src.ui.history_pages import HistoryPages
+from src.ui.intelligence_pages import IntelligencePages
+from src.ui.open_source_map import OpenSourceMap
 
 # Initialize logger
 logger = get_logger(__name__)
@@ -60,7 +62,7 @@ def main():
         st.header("Navigation")
         page = st.radio(
             "Select Page",
-            ["Dashboard", "History Study", "Advanced Graph Explorer", "Entity Resolution", "Data Import", 
+            ["Dashboard", "History Study", "Intelligence Analysis", "Open Source Map", "Advanced Graph Explorer", "Entity Resolution", "Data Import", 
              "Geospatial Analysis", "Temporal Analysis", "Network Metrics", "API Docs"]
         )
         
@@ -94,6 +96,27 @@ def main():
             history_pages.render_period_browser()
         elif history_subpage == "Research Tools":
             history_pages.render_research_tools()
+    elif page == "Intelligence Analysis":
+        intelligence_pages = IntelligencePages()
+        intelligence_subpage = st.selectbox(
+            "Select Intelligence Analysis Page",
+            ["Intelligence Dashboard", "Network Analysis", "Pattern Analysis", "Geospatial Intelligence", "Threat Assessment"]
+        )
+        
+        if intelligence_subpage == "Intelligence Dashboard":
+            intelligence_pages.render_intelligence_dashboard()
+        elif intelligence_subpage == "Network Analysis":
+            intelligence_pages.render_network_analysis()
+        elif intelligence_subpage == "Pattern Analysis":
+            intelligence_pages.render_pattern_analysis()
+        elif intelligence_subpage == "Geospatial Intelligence":
+            intelligence_pages.render_geospatial_intelligence()
+        elif intelligence_subpage == "Threat Assessment":
+            intelligence_pages.render_threat_assessment()
+    elif page == "Open Source Map":
+        history_engine = HistoryPages().engine
+        open_source_map = OpenSourceMap(history_engine)
+        open_source_map.render_interactive_map()
     elif page == "Advanced Graph Explorer":
         viz_pages.render_advanced_graph_explorer()
     elif page == "Graph Explorer":
