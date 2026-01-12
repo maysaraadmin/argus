@@ -1,0 +1,529 @@
+{
+  "case_metadata": {
+    "case_id": "USSR-1991",
+    "title": "Collapse of the Soviet Union (1985-1991)",
+    "geographic_scope": "Soviet Union and Eastern Europe",
+    "historical_period": "1985-1991",
+    "created_by": "HIAS",
+    "created_at": "2026-01-13T02:39:06.745431",
+    "last_updated": "2026-01-13T02:39:06.745431",
+    "classification": "unclassified",
+    "version": "1.0",
+    "tags": []
+  },
+  "analytic_question": {
+    "primary_question": "What best explains the timing and speed of the USSR collapse?",
+    "secondary_questions": [],
+    "exclusions": [
+      "Post-1991 economic performance of successor states",
+      "Current geopolitical situation in Eastern Europe",
+      "Long-term outcomes of transition",
+      "Modern Russia's foreign policy"
+    ],
+    "is_valid": true
+  },
+  "temporal_scope": {
+    "start_date": "1985-03-11",
+    "end_date": "1991-12-26",
+    "key_decision_points": [
+      "1986-04-26",
+      "1989-11-09",
+      "1990-03-15",
+      "1991-08-19",
+      "1991-12-08"
+    ]
+  },
+  "information_environment": {
+    "known_facts_at_time": [
+      "Soviet economy experiencing stagnation since 1970s",
+      "Gorbachev implementing Glasnost and Perestroika",
+      "Eastern Bloc countries experiencing unrest",
+      "Nationalist movements growing in republics",
+      "Military and security services facing budget pressures"
+    ],
+    "unknowns_at_time": [
+      "True loyalty of security services to central government",
+      "Extent of elite preparation for post-Soviet future",
+      "Willingness to use force against republics",
+      "International response to dissolution"
+    ],
+    "contested_information": [
+      "Actual economic performance indicators",
+      "Popular support for independence movements",
+      "Military readiness and reliability"
+    ],
+    "intelligence_capabilities": {
+      "HUMINT": true,
+      "SIGINT": true,
+      "OSINT": true,
+      "IMINT": false
+    }
+  },
+  "actors": {
+    "primary_actors": [
+      "mikhail_gorbachev",
+      "soviet_communist_party",
+      "soviet_military",
+      "kgb"
+    ],
+    "secondary_actors": [
+      "boris_yeltsin",
+      "republican_leaders",
+      "economic_reformers",
+      "conservative_hardliners"
+    ],
+    "external_actors": [
+      "united_states",
+      "nato",
+      "china",
+      "european_communities"
+    ]
+  },
+  "events": {
+    "timeline": [],
+    "critical_events": [],
+    "triggering_events": []
+  },
+  "evidence": [
+    {
+      "evidence_id": "E001",
+      "description": "August 1991 coup attempt fails to gain military support",
+      "evidence_type": "document",
+      "date": "1991-08-21",
+      "related_actors": [
+        "soviet_military",
+        "kgb",
+        "conservative_hardliners"
+      ],
+      "related_events": [
+        "august_coup"
+      ],
+      "source_reliability": "A",
+      "credibility_score": 0.9,
+      "reliability_weight": 0.9,
+      "source_details": "Contemporary Western intelligence reports",
+      "access_level": "direct",
+      "motivation": null
+    },
+    {
+      "evidence_id": "E002",
+      "description": "Soviet GDP growth negative for 3 consecutive years (1989-1991)",
+      "evidence_type": "statistic",
+      "date": "1991-06-30",
+      "related_actors": [
+        "soviet_communist_party"
+      ],
+      "related_events": [],
+      "source_reliability": "B",
+      "credibility_score": 0.8,
+      "reliability_weight": 0.6400000000000001,
+      "source_details": "Official Soviet statistics",
+      "access_level": "second_hand",
+      "motivation": null
+    },
+    {
+      "evidence_id": "E003",
+      "description": "Gorbachev refuses to use force against Baltic independence",
+      "evidence_type": "testimony",
+      "date": "1991-01-13",
+      "related_actors": [
+        "mikhail_gorbachev"
+      ],
+      "related_events": [
+        "lithuania_independence"
+      ],
+      "source_reliability": "C",
+      "credibility_score": 0.7,
+      "reliability_weight": 0.42,
+      "source_details": "Kremlin insider testimony",
+      "access_level": "second_hand",
+      "motivation": "Political justification"
+    },
+    {
+      "evidence_id": "E004",
+      "description": "Elite asset diversification to foreign banks detected",
+      "evidence_type": "intelligence_report",
+      "date": "1991-07-15",
+      "related_actors": [
+        "republican_leaders",
+        "economic_reformers"
+      ],
+      "related_events": [],
+      "source_reliability": "B",
+      "credibility_score": 0.8,
+      "reliability_weight": 0.6400000000000001,
+      "source_details": "Western financial intelligence",
+      "access_level": "direct",
+      "motivation": null
+    },
+    {
+      "evidence_id": "E005",
+      "description": "Military units refuse orders to suppress protests",
+      "evidence_type": "testimony",
+      "date": "1991-08-20",
+      "related_actors": [
+        "soviet_military"
+      ],
+      "related_events": [
+        "august_coup"
+      ],
+      "source_reliability": "A",
+      "credibility_score": 0.9,
+      "reliability_weight": 0.9,
+      "source_details": "Multiple officer testimonies",
+      "access_level": "direct",
+      "motivation": null
+    },
+    {
+      "evidence_id": "E006",
+      "description": "Republic leaders coordinate dissolution strategy",
+      "evidence_type": "document",
+      "date": "1991-12-08",
+      "related_actors": [
+        "republican_leaders"
+      ],
+      "related_events": [
+        "belavezha_accords"
+      ],
+      "source_reliability": "A",
+      "credibility_score": 0.95,
+      "reliability_weight": 0.95,
+      "source_details": "Belavezha Accords document",
+      "access_level": "direct",
+      "motivation": null
+    }
+  ],
+  "hypotheses": [
+    {
+      "hypothesis_id": "H1",
+      "statement": "Economic collapse made USSR unsustainable",
+      "scope": "structural",
+      "assumptions": [
+        "Economic problems were irreversible",
+        "Political systems depend on economic performance",
+        "No alternative economic models available"
+      ],
+      "confidence_prior": 0.6
+    },
+    {
+      "hypothesis_id": "H2",
+      "statement": "Gorbachev's reforms unintentionally caused collapse",
+      "scope": "political",
+      "assumptions": [
+        "Reforms were primary causal factor",
+        "System was stable before reforms",
+        "Reform outcomes were unintended"
+      ],
+      "confidence_prior": 0.5
+    },
+    {
+      "hypothesis_id": "H3",
+      "statement": "Elite defection and loss of coercive will caused collapse",
+      "scope": "elite",
+      "assumptions": [
+        "Elites had choice to preserve USSR",
+        "Coercive capacity existed without willingness to use",
+        "Elite self-interest drove decisions"
+      ],
+      "confidence_prior": 0.7
+    },
+    {
+      "hypothesis_id": "H4",
+      "statement": "Nationalist movements overwhelmed central authority",
+      "scope": "political",
+      "assumptions": [
+        "Nationalism was primary driver",
+        "Central authority was weak",
+        "Republics had unified goals"
+      ],
+      "confidence_prior": 0.4
+    },
+    {
+      "hypothesis_id": "H5",
+      "statement": "External pressure and containment strategy succeeded",
+      "scope": "external",
+      "assumptions": [
+        "Western policies were decisive",
+        "Cold War pressure was effective",
+        "External factors outweighed internal"
+      ],
+      "confidence_prior": 0.3
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "D001",
+      "actor_id": "mikhail_gorbachev",
+      "decision_date": "1991-01-13",
+      "options_considered": [
+        "Use force",
+        "Negotiate",
+        "Allow independence"
+      ],
+      "option_selected": "Negotiate",
+      "information_available": [
+        "E002",
+        "E003"
+      ],
+      "assumptions": [
+        "Force would backfire",
+        "Negotiation could preserve union"
+      ],
+      "outcome": "Failed to preserve union"
+    },
+    {
+      "decision_id": "D002",
+      "actor_id": "soviet_military",
+      "decision_date": "1991-08-19",
+      "options_considered": [
+        "Support coup",
+        "Remain neutral",
+        "Support Gorbachev"
+      ],
+      "option_selected": "Remain neutral",
+      "information_available": [
+        "E001",
+        "E005"
+      ],
+      "assumptions": [
+        "Coup likely to fail",
+        "Neutrality preserves institution"
+      ],
+      "outcome": "Coup failed, military remained intact"
+    }
+  ],
+  "sat_runs": [
+    {
+      "sat_type": "ACH",
+      "run_id": "ACH_20260113_023906",
+      "date_executed": "2026-01-13T02:39:06.745431",
+      "inputs": {
+        "hypotheses": [
+          "H1",
+          "H2",
+          "H3",
+          "H4",
+          "H5"
+        ],
+        "evidence": [
+          "E001",
+          "E002",
+          "E003",
+          "E004",
+          "E005",
+          "E006"
+        ]
+      },
+      "outputs": {
+        "evidence_matrix": {
+          "H1": {
+            "E001": -1,
+            "E002": 1,
+            "E003": 0,
+            "E004": 1,
+            "E005": 0,
+            "E006": 0
+          },
+          "H2": {
+            "E001": 0,
+            "E002": 1,
+            "E003": 1,
+            "E004": -1,
+            "E005": 0,
+            "E006": 0
+          },
+          "H3": {
+            "E001": 1,
+            "E002": 0,
+            "E003": 1,
+            "E004": 1,
+            "E005": 1,
+            "E006": 1
+          },
+          "H4": {
+            "E001": 0,
+            "E002": 0,
+            "E003": 0,
+            "E004": 0,
+            "E005": 0,
+            "E006": 1
+          },
+          "H5": {
+            "E001": 0,
+            "E002": 0,
+            "E003": 0,
+            "E004": 0,
+            "E005": 0,
+            "E006": 0
+          }
+        },
+        "likelihood_scores": {
+          "H1": 0.2,
+          "H2": 0.3,
+          "H3": 0.8,
+          "H4": 0.4,
+          "H5": 0.1
+        },
+        "diagnostic_evidence": [
+          "E001",
+          "E003",
+          "E005"
+        ],
+        "ranked_hypotheses": [
+          "H3",
+          "H2",
+          "H4",
+          "H1",
+          "H5"
+        ]
+      },
+      "confidence": 0.8,
+      "analyst_notes": "Elite defection hypothesis (H3) strongly supported by evidence",
+      "methodology_version": "1.0"
+    },
+    {
+      "sat_type": "RedTeam",
+      "run_id": "RedTeam_20260113_023906",
+      "date_executed": "2026-01-13T02:39:06.745431",
+      "inputs": {
+        "primary_hypothesis": "H3",
+        "evidence": [
+          "E001",
+          "E003",
+          "E005"
+        ]
+      },
+      "outputs": {
+        "challenge": "H3 understates structural constraints on elite choices",
+        "alternative_narrative": "Elites had no viable option but to abandon USSR",
+        "stress_test_results": {
+          "H3_survivability": 0.7,
+          "key_vulnerabilities": [
+            "Overstates elite agency",
+            "Ignores economic constraints"
+          ],
+          "recommendations": [
+            "Incorporate structural factors",
+            "Consider constraint analysis"
+          ]
+        }
+      },
+      "confidence": 0.6,
+      "analyst_notes": "Red Team challenge partially successful - H3 robust but needs refinement",
+      "methodology_version": "1.0"
+    },
+    {
+      "sat_type": "KAC",
+      "run_id": "KAC_20260113_023906",
+      "date_executed": "2026-01-13T02:39:06.745431",
+      "inputs": {
+        "hypothesis": "H3",
+        "assumptions": [
+          "Elites had choice to preserve USSR",
+          "Coercive capacity existed without willingness to use",
+          "Elite self-interest drove decisions"
+        ]
+      },
+      "outputs": {
+        "critical_assumptions": [
+          {
+            "assumption": "Elites had choice to preserve USSR",
+            "validity": "Partially Valid",
+            "impact": "High",
+            "reasoning": "Choice existed but constrained by structural factors"
+          },
+          {
+            "assumption": "Coercive capacity existed without willingness to use",
+            "validity": "Valid",
+            "impact": "Critical",
+            "reasoning": "Military capacity remained but political will absent"
+          }
+        ],
+        "assumption_risk_score": 0.3
+      },
+      "confidence": 0.7,
+      "analyst_notes": "Key assumptions largely valid, some refinement needed",
+      "methodology_version": "1.0"
+    }
+  ],
+  "assessments": [
+    {
+      "assessment_id": "A001",
+      "key_judgments": [
+        "Elite defection was primary driver of Soviet collapse timing",
+        "Economic problems were necessary but not sufficient condition",
+        "Coercive capacity existed without political will to use force",
+        "Gorbachev's reforms accelerated but did not cause collapse"
+      ],
+      "supporting_evidence": [
+        "E001",
+        "E003",
+        "E005",
+        "E006"
+      ],
+      "alternative_explanations": [
+        "Structural economic determinism",
+        "Reform backlash",
+        "External pressure success"
+      ],
+      "confidence_level": 0.8,
+      "confidence_limit": 0.8,
+      "dissenting_views": [
+        "Economic factors remain primary despite elite choices",
+        "Reform timeline suggests causation"
+      ],
+      "assessment_date": "2026-01-13T02:39:06.745431"
+    }
+  ],
+  "lessons_learned": [
+    {
+      "lesson_id": "L001",
+      "lesson_type": "strategic",
+      "statement": "State collapse occurs when elites abandon system preservation",
+      "transferability": "high",
+      "supporting_evidence": [
+        "E001",
+        "E005",
+        "E006"
+      ],
+      "applicability_context": "Authoritarian systems facing economic stress"
+    },
+    {
+      "lesson_id": "L002",
+      "lesson_type": "analytic",
+      "statement": "Coercive capacity meaningless without political will to use force",
+      "transferability": "high",
+      "supporting_evidence": [
+        "E001",
+        "E003",
+        "E005"
+      ],
+      "applicability_context": "Regime stability analysis"
+    },
+    {
+      "lesson_id": "L003",
+      "lesson_type": "analytic",
+      "statement": "Elite cohesion is critical early warning indicator for regime stability",
+      "transferability": "medium",
+      "supporting_evidence": [
+        "E004",
+        "E006"
+      ],
+      "applicability_context": "Intelligence monitoring of authoritarian systems"
+    },
+    {
+      "lesson_id": "L004",
+      "lesson_type": "political",
+      "statement": "Economic stress creates opportunities but not determinism for political change",
+      "transferability": "high",
+      "supporting_evidence": [
+        "E002",
+        "E003"
+      ],
+      "applicability_context": "Political transition analysis"
+    }
+  ],
+  "schema_version": "1.0",
+  "export_timestamp": "2026-01-13T02:39:06.755324",
+  "integrity_violations": []
+}
