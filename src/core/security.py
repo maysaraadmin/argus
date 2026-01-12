@@ -1,6 +1,6 @@
 """
 Fine-grained security system for Argus MVP
-Implements cell-level access control similar to Gotham
+Implements cell-level access control for historical data analysis
 """
 import hashlib
 import json

@@ -1,6 +1,6 @@
 # Argus MVP - Open Source Intelligence Platform
 
-Argus MVP is a minimal viable product of an open-source intelligence analysis platform inspired by Palantir Gotham. It provides core capabilities for entity resolution, knowledge graph construction, and relationship analysis using a modern Python stack.
+Argus MVP is a minimal viable product of an open-source intelligence analysis platform designed for historical research and analysis. It provides core capabilities for entity resolution, knowledge graph construction, and relationship analysis using a modern Python stack.
 
 ## 🚀 Features
 

@@ -16,6 +16,7 @@ from argus.config import config
 from argus.logging import get_logger
 from src.ui.visualization_pages import viz_pages
 from src.ui.enhanced_resolution import enhanced_resolution_ui
+from src.ui.history_pages import HistoryPages
 
 # Initialize logger
 logger = get_logger(__name__)
@@ -59,7 +60,7 @@ def main():
         st.header("Navigation")
         page = st.radio(
             "Select Page",
-            ["Dashboard", "Advanced Graph Explorer", "Entity Resolution", "Data Import", 
+            ["Dashboard", "History Study", "Advanced Graph Explorer", "Entity Resolution", "Data Import", 
              "Geospatial Analysis", "Temporal Analysis", "Network Metrics", "API Docs"]
         )
         
@@ -74,6 +75,25 @@ def main():
     # Page routing
     if page == "Dashboard":
         show_dashboard()
+    elif page == "History Study":
+        history_pages = HistoryPages()
+        history_subpage = st.selectbox(
+            "Select History Study Page",
+            ["History Dashboard", "Timeline Viewer", "Figure Explorer", "Event Analyzer", "Period Browser", "Research Tools"]
+        )
+        
+        if history_subpage == "History Dashboard":
+            history_pages.render_history_dashboard()
+        elif history_subpage == "Timeline Viewer":
+            history_pages.render_timeline_viewer()
+        elif history_subpage == "Figure Explorer":
+            history_pages.render_figure_explorer()
+        elif history_subpage == "Event Analyzer":
+            history_pages.render_event_analyzer()
+        elif history_subpage == "Period Browser":
+            history_pages.render_period_browser()
+        elif history_subpage == "Research Tools":
+            history_pages.render_research_tools()
     elif page == "Advanced Graph Explorer":
         viz_pages.render_advanced_graph_explorer()
     elif page == "Graph Explorer":

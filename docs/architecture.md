@@ -18,7 +18,7 @@
 ## **1. Overview**
 
 ### **1.1 Purpose**
-Argus MVP is a minimal viable product of an open-source intelligence analysis platform inspired by Palantir Gotham. It provides core capabilities for entity resolution, knowledge graph construction, and relationship analysis using a modern Python stack.
+Argus MVP is a minimal viable product of an open-source intelligence analysis platform designed for historical research and analysis. It provides core capabilities for entity resolution, knowledge graph construction, and relationship analysis using a modern Python stack.
 
 ### **1.2 Core Capabilities**
 - **Knowledge Graph Management**: Store and query entities and their relationships
@@ -935,7 +935,7 @@ alerts = {
 
 ## **Conclusion**
 
-The Argus MVP architecture is designed to be **simple yet scalable**, providing a solid foundation for building a Gotham-like intelligence analysis platform. By following these architectural principles and patterns, the system can evolve from a minimal viable product to a full-featured enterprise platform while maintaining code quality, performance, and maintainability.
+The Argus MVP architecture is designed to be **simple yet scalable**, providing a solid foundation for building a comprehensive historical analysis platform. By following these architectural principles and patterns, the system can evolve from a minimal viable product to a full-featured enterprise platform while maintaining code quality, performance, and maintainability.
 
 **Key Takeaways:**
 1. **Modular design** enables independent development and scaling
