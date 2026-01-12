@@ -1,0 +1,26 @@
+2026-01-12 23:59:58,623 - INFO - 🚀 Historical Intelligence Analysis System (HIAS) - Starting all services...
+2026-01-12 23:59:58,624 - INFO - ==================================================
+2026-01-12 23:59:58,625 - INFO - Starting services...
+2026-01-12 23:59:58,625 - INFO - 🔧 Starting API Server...
+2026-01-12 23:59:58,635 - DEBUG - PYTHONPATH set to: D:\argus\src
+2026-01-12 23:59:58,635 - DEBUG - API command: C:\Users\T\AppData\Local\Programs\Python\Python310\python.exe -c import sys; sys.path.insert(0, "d:\\argus\src"); from src.api.server import app; import uvicorn; uvicorn.run(app, host="127.0.0.1", port=8000)
+2026-01-13 00:00:00,650 - INFO -    ✅ API Server started!
+2026-01-13 00:00:00,651 - INFO -    📊 API Documentation: http://localhost:8000/docs
+2026-01-13 00:00:00,652 - INFO - 📊 Starting Streamlit UI...
+2026-01-13 00:00:00,658 - DEBUG - PYTHONPATH set to: D:\argus\src
+2026-01-13 00:00:00,658 - DEBUG - UI command: C:\Users\T\AppData\Local\Programs\Python\Python310\python.exe -m streamlit run src/ui/app.py --server.address=localhost --server.port=8501
+2026-01-13 00:00:03,789 - INFO -    ✅ Streamlit UI started!
+2026-01-13 00:00:03,789 - INFO -    🌐 Web Interface: http://localhost:8501
+2026-01-13 00:00:03,791 - INFO - Waiting for services to initialize...
+2026-01-13 00:00:06,799 - INFO - Checking service health...
+2026-01-13 00:00:06,799 - DEBUG - Checking API Server at http://localhost:8000/health
+2026-01-13 00:00:06,806 - DEBUG - Starting new HTTP connection (1): localhost:8000
+2026-01-13 00:00:10,883 - ERROR - API Server check failed: HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /health (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000024D544308E0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+2026-01-13 00:00:10,885 - DEBUG - Checking Streamlit UI at http://localhost:8501
+2026-01-13 00:00:10,887 - DEBUG - Starting new HTTP connection (1): localhost:8501
+2026-01-13 00:00:10,984 - DEBUG - http://localhost:8501 "GET / HTTP/1.1" 200 None
+2026-01-13 00:00:10,985 - DEBUG - Streamlit UI check: ✅ Success (Status: 200)
+2026-01-13 00:00:10,986 - INFO - API Health: ✅
+2026-01-13 00:00:10,987 - INFO - UI Health: ✅
+2026-01-13 00:00:10,991 - INFO - Historical Intelligence Analysis System (HIAS) started successfully
+2026-01-13 00:04:00,252 - INFO - 🛑 Stopping Historical Intelligence Analysis System (HIAS)...

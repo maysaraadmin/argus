@@ -8,6 +8,7 @@ from typing import Dict, List
 from datetime import datetime
 import sys
 import os
+import logging
 
 # Add src to Python path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
@@ -19,13 +20,14 @@ from src.ui.enhanced_resolution import enhanced_resolution_ui
 from src.ui.history_pages import HistoryPages
 from src.ui.intelligence_pages import IntelligencePages
 from src.ui.open_source_map import OpenSourceMap
+from src.ui.intelligence_history_pages import IntelligenceHistoryPages
 
 # Initialize logger
-logger = get_logger(__name__)
+logger = logging.getLogger(__name__)
 
 # Page config
 st.set_page_config(
-    page_title="Argus MVP",
+    page_title="Historical Intelligence Analysis System (HIAS)",
     page_icon="🔍",
     layout="wide"
 )
@@ -55,14 +57,17 @@ def call_api(endpoint: str, method: str = "GET", data: dict = None):
         return None
 
 def main():
-    st.title("🔍 Argus MVP - Intelligence Analysis Platform")
+    st.title("🔍 Historical Intelligence Analysis System (HIAS) - Intelligence Platform")
     
     # Sidebar
     with st.sidebar:
+        st.sidebar.markdown("---")
+        st.sidebar.markdown("### 🔍 HIAS Intelligence Platform")
+        st.sidebar.markdown("Historical Intelligence Analysis System")
         st.header("Navigation")
         page = st.radio(
             "Select Page",
-            ["Dashboard", "History Study", "Intelligence Analysis", "Open Source Map", "Advanced Graph Explorer", "Entity Resolution", "Data Import", 
+            ["Dashboard", "History Study", "Intelligence Analysis", "Intelligence History", "Open Source Map", "Advanced Graph Explorer", "Entity Resolution", "Data Import", 
              "Geospatial Analysis", "Temporal Analysis", "Network Metrics", "API Docs"]
         )
         
@@ -113,6 +118,25 @@ def main():
             intelligence_pages.render_geospatial_intelligence()
         elif intelligence_subpage == "Threat Assessment":
             intelligence_pages.render_threat_assessment()
+    elif page == "Intelligence History":
+        intel_history_pages = IntelligenceHistoryPages()
+        intel_history_subpage = st.selectbox(
+            "Select Intelligence History Page",
+            ["Analyst Workspace", "ACH Wizard", "Bias Detection", "Source Evaluation", "Counterfactual Analysis", "Intelligence Estimate"]
+        )
+        
+        if intel_history_subpage == "Analyst Workspace":
+            intel_history_pages.render_analyst_workspace()
+        elif intel_history_subpage == "ACH Wizard":
+            intel_history_pages.render_ach_wizard()
+        elif intel_history_subpage == "Bias Detection":
+            intel_history_pages.render_bias_detection()
+        elif intel_history_subpage == "Source Evaluation":
+            intel_history_pages.render_source_evaluation()
+        elif intel_history_subpage == "Counterfactual Analysis":
+            intel_history_pages.render_counterfactual_analysis()
+        elif intel_history_subpage == "Intelligence Estimate":
+            intel_history_pages.render_intelligence_estimate()
     elif page == "Open Source Map":
         history_engine = HistoryPages().engine
         open_source_map = OpenSourceMap(history_engine)

@@ -1,5 +1,5 @@
 """
-Enhanced entity resolution UI for Argus MVP
+Enhanced entity resolution UI for Historical Intelligence Analysis System (HIAS)
 Provides interactive match review and management
 """
 import streamlit as st

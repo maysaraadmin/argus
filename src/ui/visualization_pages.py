@@ -1,5 +1,5 @@
 """
-Enhanced visualization pages for Argus MVP
+Enhanced visualization pages for Historical Intelligence Analysis System (HIAS)
 Integrates Plotly, PyVis, NetworkX, and mapping capabilities
 """
 import streamlit as st

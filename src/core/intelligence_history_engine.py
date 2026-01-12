@@ -9,6 +9,11 @@ from enum import Enum
 import json
 from dataclasses import dataclass
 import re
+import sys
+import os
+
+# Add src to Python path
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 from src.core.history_engine import HistoryEngine
 from src.data.history_models import (

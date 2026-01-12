@@ -1,0 +1,33 @@
+2026-01-12 23:28:47,708 - INFO - 🚀 Argus MVP - Starting all services...
+2026-01-12 23:28:47,709 - INFO - ==================================================
+2026-01-12 23:28:47,709 - INFO - Starting services...
+2026-01-12 23:28:47,710 - INFO - 🔧 Starting API Server...
+2026-01-12 23:28:47,719 - WARNING - Port 8000 is already in use by 8228
+2026-01-12 23:28:47,720 - WARNING - Port 8000 is in use, attempting to free it...
+2026-01-12 23:28:47,727 - INFO - Terminating process 8228 using port 8000
+2026-01-12 23:28:51,746 - DEBUG - PYTHONPATH set to: D:\argus\src
+2026-01-12 23:28:51,747 - DEBUG - API command: C:\Users\T\AppData\Local\Programs\Python\Python310\python.exe -c import sys; sys.path.insert(0, "d:\\argus\src"); from src.api.server import app; import uvicorn; uvicorn.run(app, host="127.0.0.1", port=8000)
+2026-01-12 23:28:53,771 - INFO -    ✅ API Server started!
+2026-01-12 23:28:53,771 - INFO -    📊 API Documentation: http://localhost:8000/docs
+2026-01-12 23:28:53,773 - INFO - 📊 Starting Streamlit UI...
+2026-01-12 23:28:53,779 - WARNING - Port 8501 is already in use by 22244
+2026-01-12 23:28:53,779 - WARNING - Port 8501 is in use, attempting to free it...
+2026-01-12 23:28:53,788 - INFO - Terminating process 22244 using port 8501
+2026-01-12 23:28:57,792 - DEBUG - PYTHONPATH set to: D:\argus\src
+2026-01-12 23:28:57,792 - DEBUG - UI command: C:\Users\T\AppData\Local\Programs\Python\Python310\python.exe -m streamlit run src/ui/app.py --server.address=localhost --server.port=8501
+2026-01-12 23:29:00,838 - INFO -    ✅ Streamlit UI started!
+2026-01-12 23:29:00,838 - INFO -    🌐 Web Interface: http://localhost:8501
+2026-01-12 23:29:00,840 - INFO - Waiting for services to initialize...
+2026-01-12 23:29:03,853 - INFO - Checking service health...
+2026-01-12 23:29:03,855 - DEBUG - Checking API Server at http://localhost:8000/health
+2026-01-12 23:29:03,867 - DEBUG - Starting new HTTP connection (1): localhost:8000
+2026-01-12 23:29:06,002 - DEBUG - http://localhost:8000 "GET /health HTTP/1.1" 200 79
+2026-01-12 23:29:06,002 - DEBUG - API Server check: ✅ Success (Status: 200)
+2026-01-12 23:29:06,002 - DEBUG - Checking Streamlit UI at http://localhost:8501
+2026-01-12 23:29:06,005 - DEBUG - Starting new HTTP connection (1): localhost:8501
+2026-01-12 23:29:09,951 - DEBUG - http://localhost:8501 "GET / HTTP/1.1" 200 None
+2026-01-12 23:29:09,951 - DEBUG - Streamlit UI check: ✅ Success (Status: 200)
+2026-01-12 23:29:09,954 - INFO - API Health: ✅
+2026-01-12 23:29:09,954 - INFO - UI Health: ✅
+2026-01-12 23:29:09,956 - INFO - All services started successfully
+2026-01-12 23:39:26,454 - INFO - 🛑 Stopping Argus MVP...

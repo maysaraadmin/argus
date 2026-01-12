@@ -1,5 +1,5 @@
 """
-History study UI pages for Argus.
+History study UI pages for Historical Intelligence Analysis System (HIAS).
 Provides specialized interfaces for historical research and analysis.
 """
 

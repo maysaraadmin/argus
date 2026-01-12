@@ -1,0 +1,31 @@
+2026-01-12 23:39:29,324 - INFO - 🚀 Argus MVP - Starting all services...
+2026-01-12 23:39:29,331 - INFO - ==================================================
+2026-01-12 23:39:29,342 - INFO - Starting services...
+2026-01-12 23:39:29,343 - INFO - 🔧 Starting API Server...
+2026-01-12 23:39:29,353 - WARNING - Port 8000 is already in use by 0
+2026-01-12 23:39:29,362 - WARNING - Port 8000 is in use, attempting to free it...
+2026-01-12 23:39:31,388 - DEBUG - PYTHONPATH set to: D:\argus\src
+2026-01-12 23:39:31,388 - DEBUG - API command: C:\Users\T\AppData\Local\Programs\Python\Python310\python.exe -c import sys; sys.path.insert(0, "d:\\argus\src"); from src.api.server import app; import uvicorn; uvicorn.run(app, host="127.0.0.1", port=8000)
+2026-01-12 23:39:33,404 - INFO -    ✅ API Server started!
+2026-01-12 23:39:33,404 - INFO -    📊 API Documentation: http://localhost:8000/docs
+2026-01-12 23:39:33,405 - INFO - 📊 Starting Streamlit UI...
+2026-01-12 23:39:33,409 - WARNING - Port 8501 is already in use by 0
+2026-01-12 23:39:33,410 - WARNING - Port 8501 is in use, attempting to free it...
+2026-01-12 23:39:35,416 - DEBUG - PYTHONPATH set to: D:\argus\src
+2026-01-12 23:39:35,416 - DEBUG - UI command: C:\Users\T\AppData\Local\Programs\Python\Python310\python.exe -m streamlit run src/ui/app.py --server.address=localhost --server.port=8501
+2026-01-12 23:39:38,430 - INFO -    ✅ Streamlit UI started!
+2026-01-12 23:39:38,431 - INFO -    🌐 Web Interface: http://localhost:8501
+2026-01-12 23:39:38,433 - INFO - Waiting for services to initialize...
+2026-01-12 23:39:41,446 - INFO - Checking service health...
+2026-01-12 23:39:41,448 - DEBUG - Checking API Server at http://localhost:8000/health
+2026-01-12 23:39:41,457 - DEBUG - Starting new HTTP connection (1): localhost:8000
+2026-01-12 23:39:45,568 - DEBUG - http://localhost:8000 "GET /health HTTP/1.1" 200 79
+2026-01-12 23:39:45,569 - DEBUG - API Server check: ✅ Success (Status: 200)
+2026-01-12 23:39:45,570 - DEBUG - Checking Streamlit UI at http://localhost:8501
+2026-01-12 23:39:45,573 - DEBUG - Starting new HTTP connection (1): localhost:8501
+2026-01-12 23:39:45,579 - DEBUG - http://localhost:8501 "GET / HTTP/1.1" 200 None
+2026-01-12 23:39:45,579 - DEBUG - Streamlit UI check: ✅ Success (Status: 200)
+2026-01-12 23:39:45,581 - INFO - API Health: ✅
+2026-01-12 23:39:45,582 - INFO - UI Health: ✅
+2026-01-12 23:39:45,584 - INFO - All services started successfully
+2026-01-12 23:51:11,037 - INFO - 🛑 Stopping Argus MVP...

@@ -1,15 +1,25 @@
 """
-Open-source map integration for Argus history study.
+Open-source map integration for Historical Intelligence Analysis System (HIAS).
 Provides interactive mapping capabilities using open-source mapping libraries.
 """
 
 import streamlit as st
 import pandas as pd
-import plotly.graph_objects as go
+import folium
+from folium import plugins
 import plotly.express as px
-from datetime import date, datetime
-from typing import List, Dict, Optional, Tuple
-import json
+import plotly.graph_objects as go
+from datetime import datetime
+import tempfile
+import os
+import sys
+import time
+
+# Add src to Python path
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+
+from src.core.history_engine import HistoryEngine
+from src.data.history_models import EventType, HistoricalEvent, HistoricalFigure
 
 # Open-source mapping libraries
 try:
@@ -674,7 +684,18 @@ def folium_static(map_obj, width=800, height=600):
             # Display in Streamlit
             st.components.v1.html(map_html, width=width, height=height)
             
-            # Clean up
-            os.unlink(tmp_file.name)
+            # Clean up with enhanced error handling
+            try:
+                # Close file handle first to release lock
+                tmp_file.close()
+                time.sleep(0.5)  # Brief wait for file release
+                os.unlink(tmp_file.name)
+            except (PermissionError, OSError) as e:
+                st.warning(f"Could not clean up temporary file: {e}")
+                # File will be cleaned up by OS eventually
+            except Exception as e:
+                st.error(f"Unexpected error during cleanup: {e}")
+                # Use print instead of logger since logger might not be available
+                print(f"Temporary file cleanup error: {e}")
     else:
         st.error("Folium not available for map display")

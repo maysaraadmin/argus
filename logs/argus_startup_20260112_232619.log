@@ -1,0 +1,16 @@
+2026-01-12 23:26:19,784 - INFO - 🚀 Argus MVP - Starting all services...
+2026-01-12 23:26:19,784 - INFO - ==================================================
+2026-01-12 23:26:19,784 - INFO - Starting services...
+2026-01-12 23:26:19,787 - INFO - 🔧 Starting API Server...
+2026-01-12 23:26:19,788 - DEBUG - PYTHONPATH set to: D:\argus\src
+2026-01-12 23:26:19,788 - DEBUG - API command: C:\Users\T\AppData\Local\Programs\Python\Python310\python.exe -c import sys; sys.path.insert(0, "d:\\argus\src"); from src.api.server import app; import uvicorn; uvicorn.run(app, host="127.0.0.1", port=8000)
+2026-01-12 23:26:21,801 - INFO -    ✅ API Server started!
+2026-01-12 23:26:21,803 - INFO -    📊 API Documentation: http://localhost:8000/docs
+2026-01-12 23:26:21,803 - INFO - 📊 Starting Streamlit UI...
+2026-01-12 23:26:21,805 - DEBUG - PYTHONPATH set to: D:\argus\src
+2026-01-12 23:26:21,805 - DEBUG - UI command: C:\Users\T\AppData\Local\Programs\Python\Python310\python.exe -m streamlit run src/ui/app.py --server.address=localhost --server.port=8501
+2026-01-12 23:26:24,827 - ERROR - Streamlit UI failed to start immediately
+2026-01-12 23:26:24,827 - ERROR - STDOUT: None
+2026-01-12 23:26:24,829 - ERROR - STDERR: 2026-01-12 23:26:24.229 Port 8501 is already in use
+
+2026-01-12 23:26:24,829 - ERROR - ❌ Failed to start services

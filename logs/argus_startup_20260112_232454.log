@@ -1,0 +1,15 @@
+2026-01-12 23:24:54,421 - INFO - ==================================================
+2026-01-12 23:24:54,421 - INFO - Starting services...
+2026-01-12 23:24:54,432 - DEBUG - PYTHONPATH set to: D:\argus\src
+2026-01-12 23:24:54,432 - DEBUG - API command: C:\Users\T\AppData\Local\Programs\Python\Python310\python.exe -c import sys; sys.path.insert(0, "d:\\argus\src"); from src.api.server import app; import uvicorn; uvicorn.run(app, host="127.0.0.1", port=8000)
+2026-01-12 23:24:56,460 - DEBUG - PYTHONPATH set to: D:\argus\src
+2026-01-12 23:24:56,461 - DEBUG - UI command: C:\Users\T\AppData\Local\Programs\Python\Python310\python.exe -m streamlit run src/ui/app.py --server.address=localhost --server.port=8501
+2026-01-12 23:24:59,504 - INFO - Waiting for services to initialize...
+2026-01-12 23:25:02,508 - INFO - Checking service health...
+2026-01-12 23:25:02,887 - DEBUG - Checking API Server at http://localhost:8000/health
+2026-01-12 23:25:02,892 - DEBUG - Starting new HTTP connection (1): localhost:8000
+2026-01-12 23:25:04,946 - DEBUG - http://localhost:8000 "GET /health HTTP/1.1" 200 79
+2026-01-12 23:25:04,963 - DEBUG - Checking Streamlit UI at http://localhost:8501
+2026-01-12 23:25:04,967 - DEBUG - Starting new HTTP connection (1): localhost:8501
+2026-01-12 23:25:04,973 - DEBUG - http://localhost:8501 "GET / HTTP/1.1" 200 None
+2026-01-12 23:25:05,001 - INFO - All services started successfully

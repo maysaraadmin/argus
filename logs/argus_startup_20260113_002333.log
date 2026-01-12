@@ -1,0 +1,29 @@
+2026-01-13 00:23:33,359 - INFO - 🚀 Historical Intelligence Analysis System (HIAS) - Starting all services...
+2026-01-13 00:23:33,362 - INFO - ==================================================
+2026-01-13 00:23:33,364 - INFO - Starting services...
+2026-01-13 00:23:33,365 - INFO - 🔧 Starting API Server...
+2026-01-13 00:23:33,376 - DEBUG - PYTHONPATH set to: D:\argus\src
+2026-01-13 00:23:33,376 - DEBUG - API command: C:\Users\T\AppData\Local\Programs\Python\Python310\python.exe -c import sys; sys.path.insert(0, "d:\\argus\src"); from src.api.server import app; import uvicorn; uvicorn.run(app, host="127.0.0.1", port=8000)
+2026-01-13 00:23:35,399 - INFO -    ✅ API Server started!
+2026-01-13 00:23:35,400 - INFO -    📊 API Documentation: http://localhost:8000/docs
+2026-01-13 00:23:35,401 - INFO - 📊 Starting Streamlit UI...
+2026-01-13 00:23:35,406 - WARNING - Port 8501 is already in use by 21688
+2026-01-13 00:23:35,406 - WARNING - Port 8501 is in use, attempting to free it...
+2026-01-13 00:23:35,414 - INFO - Terminating process 21688 using port 8501
+2026-01-13 00:23:39,424 - DEBUG - PYTHONPATH set to: D:\argus\src
+2026-01-13 00:23:39,426 - DEBUG - UI command: C:\Users\T\AppData\Local\Programs\Python\Python310\python.exe -m streamlit run src/ui/app.py --server.address=localhost --server.port=8501
+2026-01-13 00:23:42,485 - INFO -    ✅ Streamlit UI started!
+2026-01-13 00:23:42,486 - INFO -    🌐 Web Interface: http://localhost:8501
+2026-01-13 00:23:42,487 - INFO - Waiting for services to initialize...
+2026-01-13 00:23:45,494 - INFO - Checking service health...
+2026-01-13 00:23:45,494 - DEBUG - Checking API Server at http://localhost:8000/health
+2026-01-13 00:23:45,500 - DEBUG - Starting new HTTP connection (1): localhost:8000
+2026-01-13 00:23:49,654 - ERROR - API Server check failed: HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /health (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000002985D0D48E0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+2026-01-13 00:23:49,656 - DEBUG - Checking Streamlit UI at http://localhost:8501
+2026-01-13 00:23:49,659 - DEBUG - Starting new HTTP connection (1): localhost:8501
+2026-01-13 00:23:49,665 - DEBUG - http://localhost:8501 "GET / HTTP/1.1" 200 None
+2026-01-13 00:23:49,669 - DEBUG - Streamlit UI check: ✅ Success (Status: 200)
+2026-01-13 00:23:49,718 - INFO - API Health: ✅
+2026-01-13 00:23:49,719 - INFO - UI Health: ✅
+2026-01-13 00:23:49,726 - INFO - Historical Intelligence Analysis System (HIAS) started successfully
+2026-01-13 00:56:26,335 - INFO - 🛑 Stopping Historical Intelligence Analysis System (HIAS)...
