@@ -4,3 +4,22 @@
 2026-01-13 02:43:00,486 - INFO - 🔧 Starting API Server...
 2026-01-13 02:43:00,501 - DEBUG - PYTHONPATH set to: D:\argus\src
 2026-01-13 02:43:00,501 - DEBUG - API command: C:\Users\T\AppData\Local\Programs\Python\Python310\python.exe -c import sys; sys.path.insert(0, "d:\\argus\src"); from src.api.server import app; import uvicorn; uvicorn.run(app, host="127.0.0.1", port=8000)
+2026-01-13 02:43:02,530 - INFO -    ✅ API Server started!
+2026-01-13 02:43:02,551 - INFO -    📊 API Documentation: http://localhost:8000/docs
+2026-01-13 02:43:02,553 - INFO - 📊 Starting Streamlit UI...
+2026-01-13 02:43:02,580 - DEBUG - PYTHONPATH set to: D:\argus\src
+2026-01-13 02:43:02,580 - DEBUG - UI command: C:\Users\T\AppData\Local\Programs\Python\Python310\python.exe -m streamlit run src/ui/app.py --server.address=localhost --server.port=8501
+2026-01-13 02:43:05,686 - INFO -    ✅ Streamlit UI started!
+2026-01-13 02:43:05,686 - INFO -    🌐 Web Interface: http://localhost:8501
+2026-01-13 02:43:05,687 - INFO - Waiting for services to initialize...
+2026-01-13 02:43:08,690 - INFO - Checking service health...
+2026-01-13 02:43:08,692 - DEBUG - Checking API Server at http://localhost:8000/health
+2026-01-13 02:43:08,719 - DEBUG - Starting new HTTP connection (1): localhost:8000
+2026-01-13 02:43:12,866 - ERROR - API Server check failed: HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /health (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000002288F6908E0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+2026-01-13 02:43:12,868 - DEBUG - Checking Streamlit UI at http://localhost:8501
+2026-01-13 02:43:12,869 - DEBUG - Starting new HTTP connection (1): localhost:8501
+2026-01-13 02:43:15,242 - DEBUG - http://localhost:8501 "GET / HTTP/1.1" 200 None
+2026-01-13 02:43:15,244 - DEBUG - Streamlit UI check: ✅ Success (Status: 200)
+2026-01-13 02:43:15,249 - INFO - API Health: ✅
+2026-01-13 02:43:15,250 - INFO - UI Health: ✅
+2026-01-13 02:43:15,274 - INFO - Historical Intelligence Analysis System (HIAS) started successfully
